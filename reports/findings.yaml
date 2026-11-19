@@ -1,0 +1,53 @@
+group_id: G256
+problem_id: MP060
+data_issues:
+  leaking_column:
+    present: true
+    column: pick_time_from_scanner
+  unit_mixup:
+    present: true
+    column: shelf_height_m
+    group_value: Morning
+    factor: 101
+  sentinel_value:
+    present: true
+    column: order_weight_kg
+    value: 999
+    count: 64
+  duplicate_rows:
+    present: false
+    count: null
+  stuck_sensor:
+    present: true
+    column: shift_hour
+    start_date: '2026-03-13'
+    end_date: '2026-04-04'
+  target_typos:
+    present: false
+    count: null
+  spelling_variants:
+    present: false
+    column: null
+    true_levels: null
+tracking:
+  experiment_name: mp060-warehouse-picking
+  best_run_id: e805e2081c9c40f0a768e57b24b18567
+  registered_model_name: mp060-picking-time
+  champion_version: 1
+monitoring:
+  psi:
+    items_in_order: 0.0314
+    aisle_distance_m: 0.0648
+    picker_exp_months: 5.2589
+    shelf_height_m: 0.0136
+    shift_hour: 0.0279
+    order_weight_kg: 0.0348
+  most_drifted_feature: picker_exp_months
+  mae_by_group:
+    Morning: 23.7858
+    Evening: 25.0167
+    Night: 63.9311
+  worst_served_group: Night
+  mae_v1_on_check: 36.9828
+  mae_v2_on_check: 32.9161
+  decision: keep

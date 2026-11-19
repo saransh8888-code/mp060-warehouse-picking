@@ -1,0 +1,27 @@
+data:
+  train_path: "data/raw/train.csv"
+  later_path: "data/raw/later.csv"
+  holdout_path: "data/raw/holdout_features.csv"
+  predictions_path: "predictions/holdout_predictions.csv"
+  findings_path: "reports/findings.yaml"
+
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "mp060-warehouse-picking"
+  registered_model_name: "mp060-picking-time"
+
+model:
+  model_path: "models/model.joblib"
+  random_state: 42
+  promotion_threshold: 0.15
+  num_features:
+    - items_in_order
+    - aisle_distance_m
+    - picker_exp_months
+    - shelf_height_m
+    - shift_hour
+    - order_weight_kg
+  cat_features:
+    - zone_type
+    - shift
+  target: "pick_seconds"

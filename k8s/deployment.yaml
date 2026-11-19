@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mp060-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mp060-api
+  template:
+    metadata:
+      labels:
+        app: mp060-api
+    spec:
+      containers:
+        - name: mp060-api
+          image: mp060-api:1.0
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
