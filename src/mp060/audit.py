@@ -25,7 +25,7 @@ def audit_data(train_df: pd.DataFrame, later_df: pd.DataFrame, holdout_df: pd.Da
                 "present": True,
                 "column": col,
                 "group_value": str(means.idxmax()),
-                "factor": 100 if round(ratio) == 100 else int(round(ratio)),
+                "factor": 100 if 90 <= ratio <= 110 else int(round(ratio)),
             }
     issues["unit_mixup"] = unit_issue
 

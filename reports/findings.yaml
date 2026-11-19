@@ -8,7 +8,7 @@ data_issues:
     present: true
     column: shelf_height_m
     group_value: Morning
-    factor: 101
+    factor: 100
   sentinel_value:
     present: true
     column: order_weight_kg
