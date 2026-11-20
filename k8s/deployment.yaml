@@ -1,3 +1,4 @@
+# MP060 Kubernetes Deployment (2 replicas, port 8000)
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,31 +30,3 @@ spec:
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 20
-EOFcat << 'EOF' > k8s/service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: mp060-svc
-spec:
-  type: ClusterIP
-  selector:
-    app: mp060-api
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8000
-EOFcat << 'EOF' > .github/workflows/ci.yml
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: PYTHONPATH=.:src pytest -v
