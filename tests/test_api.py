@@ -22,3 +22,6 @@ def test_clean():
     df = pd.DataFrame({"date": ["2026-03-15"], "shift": ["Morning"], "shelf_height_m": [150.0], "order_weight_kg": [999.0], "shift_hour": [13], "pick_time_from_scanner": [200]})
     c = clean_dataframe(df, is_train=True)
     assert "pick_time_from_scanner" not in c.columns and c.loc[0, "shelf_height_m"] == 1.5
+def test_predict_boundary_values():
+    r = client.post("/predict", json={"items_in_order": 10, "aisle_distance_m": 5.0, "picker_exp_months": 100.0, "shelf_height_m": 1.2, "shift_hour": 14, "order_weight_kg": 8.0, "zone_type": "chilled", "shift": "Evening"})
+    assert r.status_code == 200
